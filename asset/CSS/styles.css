@@ -25,6 +25,14 @@ a {
     text-decoration: none;
 }
 
+input,
+textarea,
+select,
+button {
+    font-family: inherit;
+    font-size: inherit;
+}
+
 .container {
     width: 1170px;
     max-width: calc(100% - 48px);
@@ -420,9 +428,10 @@ a {
 /* ==================== Doctor ==================== */
 .doctor {
     padding: 85px 0px;
+    text-align: center;
 }
 
-.doctor-top {
+.doctor__header {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -433,25 +442,33 @@ a {
 }
 
 .doctor-list {
-    margin-top: 85px;
-    display: flex;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 30px;
+    margin-top: 70px;
 }
 
-.doctor__img {
-    background: var(--quaternary-color);
-    width: 100%;
+.doctor-item:hover .doctor-item__img {
+    transform: scale(1.1);
+}
+
+.doctor-item__img-bg {
+    padding-top: 20px;
     border-radius: 6px;
-    height: 318px;
+    background: var(--quaternary-color);
+    overflow: hidden;
+}
+
+.doctor-item__img {
+    display: block;
+    max-width: 100%;
+    height: 290px;
     object-fit: cover;
+    transition: .25s;
 }
 
-.doctor-item__desc,
-.doctor-item__heading {
-    text-align: center;
-}
-
-.doctor-item__heading {
+.doctor-item__name {
+    margin-top: 12px;
     color: var(--primary-color);
     font-weight: 400;
     line-height: 1.75;
@@ -467,7 +484,7 @@ a {
     margin-top: 38px;
     display: flex;
     justify-content: center;
-    gap: 18px;
+    column-gap: 18px;
 }
 
 .control-btn {
@@ -476,8 +493,10 @@ a {
     justify-content: center;
     width: 36px;
     height: 36px;
-    border: 0.25px solid #585858;
     border-radius: 50%;
+    border: 1px solid #575f66;
+    outline: none;
+    color: #575f66;
     background: transparent;
 }
 
@@ -526,7 +545,7 @@ a {
 }
 
 .application-heading {
-    width: 498px;
+    max-width: 498px;
 }
 
 .application-desc {
@@ -536,7 +555,7 @@ a {
 
 .application-download {
     display: flex;
-    gap: 28px;
+    column-gap: 28px;
 }
 
 /* ==================== News ==================== */
@@ -556,14 +575,15 @@ a {
 }
 
 .news-link {
-    display: inline-block;
     margin: 28px 0;
+    display: inline-block;
     color: var(--primary-color);
     font-family: 'Inter', sans-serif;
     font-size: 1.8rem;
     font-weight: 600;
     line-height: 1.56;
     text-decoration-line: underline;
+    text-underline-offset: 4px;
 }
 
 .news-control {
@@ -571,7 +591,7 @@ a {
     gap: 18px;
 }
 
-.news-list {
+.news__list {
     display: flex;
     gap: 30px;
     margin-left: 130px;
@@ -581,18 +601,30 @@ a {
     border-radius: 12px;
     background: #fff;
     border: 1px solid #E8EBEE;
+    overflow: hidden;
+    transition: 0.25s;
 }
 
 .news-item:hover {
     box-shadow: 0px 18px 50px 0px rgba(0, 0, 0, 0.05);
-    border-color: none;
+    border-color: transparent;
+}
+
+.news-item:hover .news-thumb {
+    transform: scale(1.1);
+}
+
+.news-images {
+    overflow: hidden;
+    height: 172px;
 }
 
 .news-thumb {
     width: 100%;
-    height: 172px;
+    height: 100%;
     object-fit: cover;
     border-radius: 12px 12px 0px 0px;
+    transition: 0.25s;
 }
 
 .news-item__body {
@@ -634,6 +666,7 @@ a {
     text-align: center;
     padding: 100px 180px;
     background: var(--tertiary-color);
+    border-radius: 4px;
 }
 
 .appointment__heading {
@@ -656,10 +689,9 @@ a {
 
 .appointment__desc {
     margin: 18px auto 38px;
-    width: 617px;
+    max-width: 617px;
     color: #575F66;
     line-height: 1.75;
-    /* 175% */
 }
 
 /* ==================== footer ==================== */
@@ -667,6 +699,13 @@ a {
 .footer {
     background: var(--primary-color);
     padding: 100px 0 42px;
+}
+
+.footer__row {
+    display: grid;
+    grid-template-columns: 1fr 0.4fr 0.4fr 1fr;
+    column-gap: 78px;
+    border-bottom: 1px solid #406181;
 }
 
 .footer__desc {
@@ -677,17 +716,6 @@ a {
     line-height: 1.75;
 }
 
-.footer__row {
-    display: grid;
-    grid-template-columns: 1fr 0.4fr 0.4fr 1fr;
-    column-gap: 78px;
-    border-bottom: 1px solid #406181;
-}
-
-
-.footer__list {
-    margin: 20px 0 28px;
-}
 
 .footer__heading {
     color: #FFF;
@@ -696,38 +724,33 @@ a {
     line-height: 1.75;
 }
 
+.footer__list {
+    margin: 20px 0 28px;
+}
+
 .footer__link {
-    display: block;
     margin-top: 10px;
+    display: block;
     color: #A9B3BB;
     font-family: var(--footer-font);
     font-size: 1.4rem;
     font-weight: 400;
     line-height: 1.86;
+    white-space: nowrap;
 }
 
 .footer__link:hover {
     text-decoration: underline;
 }
 
-.footer__copyright {
-    margin-top: 28px;
-    color: #AAB3BA;
-    text-align: center;
-    font-family: var(--footer-font);
-    font-size: 1.4rem;
-    font-weight: 400;
-    line-height: 1.86;
-}
-
-.social-links {
+.footer__social-links {
     margin-top: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.social-button {
+.footer__social-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -762,7 +785,7 @@ a {
 }
 
 .subscribe__form {
-    gap: 12px;
+    column-gap: 12px;
     margin-top: 10px;
     display: flex;
     align-items: center;
@@ -771,16 +794,17 @@ a {
 
 .subscribe__input {
     width: 100%;
+    padding: 10px;
     height: 46px;
     border-radius: 4px;
     border: 1px solid #406181;
     background: transparent;
-
+    outline: none;
+    color: #fff;
 }
 
-::placeholder {
+.subscribe__input::placeholder {
     display: block;
-    padding: 10px;
     color: #9CA8B1;
     font-family: var(--footer-font);
     font-size: 1.4rem;
@@ -789,12 +813,22 @@ a {
 }
 
 .subscribe__btn {
-    height: 46px;
-    line-height: 46px;
+    --height: 46px;
+
     min-width: 108px;
     border-radius: 4px;
     font-family: var(--footer-font);
     font-size: 14px;
+    font-weight: 400;
+    line-height: 1.86;
+}
+
+.footer__copyright {
+    margin-top: 28px;
+    color: #AAB3BA;
+    text-align: center;
+    font-family: var(--footer-font);
+    font-size: 1.4rem;
     font-weight: 400;
     line-height: 1.86;
 }
